@@ -12,14 +12,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class ProductController extends Controller
+class SupplyController extends Controller
 {
   /**
-   * @Route("/product", name="product")
+   * @Route("/supply", name="supply")
    * @Method({"GET"})
    */
   public function indexAction()
   {
-    return $this->render('@App/product.html.twig');
+    return $this->render('@App/supply.html.twig');
   }
 }

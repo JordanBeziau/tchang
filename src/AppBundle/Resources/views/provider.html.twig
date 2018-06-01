@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+  <h1 class="title is-h1">👨🏻‍🍳 Providers</h1>
+  <a href="{{ path('newProvider') }}" class="button is-primary is-medium is-uppercase">+ Add provider</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Siret</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% for provider in providers %}
+          <td>{{ provider.name }}</td>
+          <td>{{ provider.address }}</td>
+          <td>{{ provider.siret }}</td>
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}

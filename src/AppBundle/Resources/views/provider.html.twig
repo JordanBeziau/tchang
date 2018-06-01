@@ -8,16 +8,24 @@
         <th>Name</th>
         <th>Address</th>
         <th>Siret</th>
+        <th>Update</th>
+        <th>Remove</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        {% for provider in providers %}
+      {% for provider in providers %}
+        <tr>
           <td>{{ provider.name }}</td>
           <td>{{ provider.address }}</td>
           <td>{{ provider.siret }}</td>
-        {% endfor %}
-      </tr>
+          <td>
+            <a href="{{ path('providerEdit') }}/{{ provider.id }}" class="button is-link">🖊 Update</a>
+          </td>
+          <td>
+            <a href="{{ path('provider') }}/delete/{{ provider.id }}" class="button is-link">╳ Remove</a>
+          </td>
+        </tr>
+      {% endfor %}
     </tbody>
   </table>
 {% endblock %}

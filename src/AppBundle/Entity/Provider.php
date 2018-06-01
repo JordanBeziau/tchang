@@ -41,7 +41,7 @@ class Provider
   protected $siret;
 
   /**
-   * @ORM\Column(name="active", type="smallint", length=1, nullable=false)
+   * @ORM\Column(name="active", type="boolean", nullable=false)
    */
   protected $active;
 

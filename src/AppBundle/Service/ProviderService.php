@@ -34,6 +34,19 @@ class ProviderService
     $this->getDoctrine()->flush();
   }
 
+  public function updateProvider(Provider $data)
+  {
+    $data->setUpdatedAt(new \DateTime());
+    $this->getDoctrine()->persist($data);
+    $this->getDoctrine()->flush();
+  }
+
+  public function deleteProvider(Provider $id)
+  {
+    $this->getDoctrine()->remove($this->getDoctrine()->getRepository(Provider::class)->find($id));
+    $this->getDoctrine()->flush();
+  }
+
   /**
    * @return mixed
    */

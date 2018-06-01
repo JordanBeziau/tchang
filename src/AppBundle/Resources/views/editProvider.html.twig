@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+  <h1 class="title is-h1">Edit a provider</h1>
+  {{ form_start(form) }}
+  <div class="field">
+    {{ form_label(form.name, '', {'label_attr' : {'class' : 'label'}}) }}
+    <div class="control">
+      {{ form_widget(form.name) }}
+    </div>
+  </div>
+  <div class="field">
+    {{ form_label(form.address, '', {'label_attr' : {'class' : 'label'}}) }}
+    <div class="control">
+      {{ form_widget(form.address) }}
+    </div>
+  </div>
+  <div class="field">
+    {{ form_label(form.siret, '', {'label_attr' : {'class' : 'label'}}) }}
+    <div class="control">
+      {{ form_widget(form.siret) }}
+    </div>
+  </div>
+  <div class="field">
+    {{ form_label(form.active, '', {'label_attr' : {'class' : 'label'}}) }}
+    <div class="control">
+      {{ form_widget(form.active) }}
+    </div>
+  </div>
+  {{ form_rest(form) }}
+  <input type="submit" value="Update" class="is-uppercase button is-primary is-medium">
+  {{ form_end(form) }}
+{% endblock %}

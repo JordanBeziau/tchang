@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Provider;
+use AppBundle\Entity\ProviderSupply;
 use AppBundle\Form\ProviderType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -34,40 +35,36 @@ class ProviderController extends Controller
   }
 
   /**
-   * @Route("/provider/new", name="newProvider")
+   * @Route("/provider/new", name="newProvider", defaults={"id":null})
+   * @Route("/provider/edit/{id}", name="providerEdit")
    * @Method({"GET","POST"})
    */
-  public function createProviderAction(Request $request)
+  public function createProviderAction(Request $request, Provider $id = null)
   {
-    $form = $this->createForm(ProviderType::class);
-    $form->remove('active');
+    $providerService = $this->get('provider.service');
+    $form = $this->createForm(ProviderType::class, $provider = $id ? $id : new Provider(), [
+      'providerSupply' => $providerService->joinRequest($id)
+    ]);
+    if (!$id) $form->remove('active');
     $form->handleRequest($request);
 
     if ($form->isValid() && $form->isSubmitted()) {
-      $this->get('provider.service')->createProvider($form->getData());
+      if (!$id)
+        $this->get('provider.service')->createProvider($provider);
+      else
+        $this->get('provider.service')->updateProvider($provider);
+
+      $formPost = $request->request->get('appbundle_provider');
+      if (array_key_exists('providerSupply', $formPost) && !empty($formPost['providerSupply'])) {
+        $formPost = $providerService->handleRelation($provider, $formPost);
+        foreach ($formPost['providerSupply'] as $item) {
+          $providerService->registerProviderSupply($item, $form->getData());
+        }
+      }
       return $this->redirectToRoute('provider');
     }
 
     return $this->render('@App/newProvider.html.twig', [
-      'form' => $form->createView()
-    ]);
-  }
-
-  /**
-   * @Route("/provider/edit/{id}", name="providerEdit", defaults={"id":null})
-   * @Method({"GET","POST"})
-   */
-  public function updateProviderAction(Request $request, Provider $id)
-  {
-    $form = $this->createForm(ProviderType::class, $id);
-    $form->handleRequest($request);
-
-    if ($form->isValid() && $form->isSubmitted()) {
-      $this->get('provider.service')->updateProvider($form->getData());
-      return $this->redirectToRoute('provider');
-    }
-
-    return $this->render('@App/editProvider.html.twig', [
       'form' => $form->createView()
     ]);
   }

@@ -38,4 +38,60 @@ class ProviderSupply
    * @ORM\Column(name="created_at", type="datetime", nullable=false)
    */
   protected $createdAt;
+
+  /**
+   * @return mixed
+   */
+  public function getIdProvider()
+  {
+    return $this->idProvider;
+  }
+
+  /**
+   * @param mixed $idProvider
+   */
+  public function setIdProvider($idProvider)
+  {
+    $this->idProvider = $idProvider;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getIdSupply()
+  {
+    return $this->idSupply;
+  }
+
+  /**
+   * @param mixed $idSupply
+   */
+  public function setIdSupply($idSupply)
+  {
+    $this->idSupply = $idSupply;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getCreatedAt()
+  {
+    return $this->createdAt;
+  }
+
+  /**
+   * @param mixed $createdAt
+   */
+  public function setCreatedAt($createdAt)
+  {
+    $this->createdAt = $createdAt;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getId()
+  {
+    return $this->id;
+  }
 }

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\ProviderSupply;
 use AppBundle\Entity\Supply;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -21,6 +22,7 @@ class ProviderType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+      dump($options['providerSupply']);
         $builder
           ->add('name', TextType::class, [
             'constraints' => new Length(['min' => 1, 'max' => 50]),
@@ -45,10 +47,22 @@ class ProviderType extends AbstractType
             ],
             'expanded' => true
           ])
-          ->add('', EntityType::class, [
+          ->add('providerSupply', EntityType::class, [
+            'label' => 'Supplies',
+            'attr' => ['class' => 'checkbox'],
+            'mapped' => false,
             'class' => Supply::class,
             'multiple' => true,
-            'expanded' => false
+            'expanded' => true,
+            'choice_attr' => function ($providerSupply) use ($options) {
+              $attr = [];
+              foreach ($options['providerSupply'] as $option) {
+                if ($option->getIdSupply()->getId() === $providerSupply->getId()) {
+                  $attr['checked'] = 'checked';
+                }
+              }
+              return $attr;
+            }
           ]);
     }
     /**
@@ -57,7 +71,9 @@ class ProviderType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Provider'
+            'data_class' => 'AppBundle\Entity\Provider',
+            'providerSupply' => null,
+            'allow_extra_fields' => true
         ));
     }
 

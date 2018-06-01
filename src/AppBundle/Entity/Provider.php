@@ -167,4 +167,20 @@ class Provider
   {
     $this->updatedAt = $updatedAt;
   }
+
+  /**
+   * @return mixed
+   */
+  public function getProviderSupply()
+  {
+    return $this->provider_supply;
+  }
+
+  /**
+   * @param mixed $provider_supply
+   */
+  public function setProviderSupply($provider_supply)
+  {
+    $this->provider_supply = $provider_supply;
+  }
 }

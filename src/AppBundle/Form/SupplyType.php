@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,12 +24,21 @@ class SupplyType extends AbstractType
             'attr' => ['class' => 'input']
           ])
           ->add('buyingPrice', NumberType::class, [
-            'label' => 'Name',
+            'label' => 'Buying Price',
             'attr' => ['class' => 'input']
           ])
           ->add('sellingPrice', NumberType::class, [
-            'label' => 'Name',
+            'label' => 'Selling Price',
             'attr' => ['class' => 'input']
+          ])
+          ->add('active', ChoiceType::class, [
+            'label' => 'Active',
+            'attr' => ['class' => 'radio'],
+            'choices' => [
+              'Yes' => 1,
+              'No' => 0
+            ],
+            'expanded' => true
           ]);
     }
     /**

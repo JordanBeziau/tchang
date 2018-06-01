@@ -1,7 +1,31 @@
 {% extends 'base.html.twig' %}
 {% block body %}
   <h1 class="title is-h1">🦐 Supplies</h1>
-  <ul>
-    <li>product</li>
-  </ul>
+  <a href="{{ path('newSupply') }}" class="button is-primary is-medium is-uppercase">+ Add supply</a>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Buying Price</th>
+      <th>Selling Price</th>
+      <th>Update</th>
+      <th>Remove</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for supply in supplies %}
+      <tr>
+        <td>{{ supply.name }}</td>
+        <td>{{ supply.buyingPrice }} $</td>
+        <td>{{ supply.sellingPrice }} $</td>
+        <td>
+          <a href="{{ path('editSupply') }}/{{ supply.id }}" class="button is-link">🖊 Update</a>
+        </td>
+        <td>
+          <a href="{{ path('removeSupply') }}/{{ supply.id }}" class="button is-link">╳ Remove</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}

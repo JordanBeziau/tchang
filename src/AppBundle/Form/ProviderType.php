@@ -2,6 +2,8 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Supply;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -42,6 +44,11 @@ class ProviderType extends AbstractType
               'No' => 0
             ],
             'expanded' => true
+          ])
+          ->add('', EntityType::class, [
+            'class' => Supply::class,
+            'multiple' => true,
+            'expanded' => false
           ]);
     }
     /**

@@ -25,12 +25,12 @@ class ProviderSupply
   protected $id;
 
   /**
-   * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Provider", inversedBy="id")
+   * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Provider", inversedBy="provider_supply")
    */
   protected $idProvider;
 
   /**
-   * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Supply", inversedBy="id")
+   * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Supply", inversedBy="supply_provider")
    */
   protected $idSupply;
 

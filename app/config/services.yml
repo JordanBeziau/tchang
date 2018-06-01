@@ -38,3 +38,8 @@ services:
       class: AppBundle\Service\ProviderService
       public: true
       arguments: ['@doctrine.orm.entity_manager']
+
+    supply.service:
+      class: AppBundle\Service\SupplyService
+      public: true
+      arguments: ['@doctrine.orm.entity_manager']

@@ -28,9 +28,8 @@ class ProviderController extends Controller
     if ($id)
       $this->get('provider.service')->deleteProvider($id);
 
-    $providers = $this->get('provider.service')->getProviders();
     return $this->render('@App/provider.html.twig', [
-      'providers' => $providers
+      'providers' => $this->get('provider.service')->getProviders()
     ]);
   }
 

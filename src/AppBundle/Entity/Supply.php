@@ -21,9 +21,13 @@ class Supply
    * @ORM\Id
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
-   * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProviderSupply", mappedBy="idSupply")
    */
   protected $id;
+
+  /**
+   * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProviderSupply", mappedBy="idSupply")
+   */
+  protected $supply_provider;
 
   /**
    * @ORM\Column(name="name", type="string", length=50, nullable=false)
